@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Flashcard Ever Made</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Roboto&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<!--
+Hey Maren - heres my idea
+I think i am going to to do a flashcard game
+How many questions can you solve in 1 min
+The game will have a counter, to show correct and incorrect amounts.
+It will have a timer counting down.
+It will show a question from an array of objects
+It will take a user input for them to answer.
+after timer it will show results.
+
+Hey John - that sounds great! It might be worth holding off on the timer as a “nice-to-have” and first working on the
+card question & answers logic
+
+start with 5 questions or so and then show the result at the end of the 5 questions
+
+then when that logic is secured you can add the timer and increase the number of questions so there’s more if a
+challenge for them! -->
+  <header class="mt-auto text-center">
+      <h1 class="mt-3">Asl Alphabet Quiz</h1>
+  </header>
+  <section class="mt-3">
+    <article class="question p-4 text-center">
+        <h2 class="questionGoesHere mb-0">QUESTION GOES HERE</h2>
+        <img src="img/a.svg" alt="" class="i-image" data-id="">
+    </article>
+    <article class="answer text-center my-3">
+      <form action="" method="get" class="">
+        <div class="userInput">
+          <label for="userAnswer">
+            <h3 class="h6 mb-0">
+              Enter Answer Below
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down bounce-arrow" width="25" height="25"
+                viewBox="0 0 24 30" stroke-width="1" stroke="#ffffff" fill="#fff" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+              </svg>
+            </h3>
+          </label>
+          <input type="text" id="userAnswer" name="userAnswer"  size="10">
+        </div>
+        <div class="submit">
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+    </article>
+    <article>
+        <div class="total-correct text-center">
+          <p class="mb-1">Total Correct <span class="totalCorrectAnswer">Number Here</span></p>
+          <p class="correctPercentage">%%%</p>
+        </div>
+    </article>
+  </section>
+  <footer class="mt-auto w-100 p-3 text-center">
+    <a href="https://junocollege.com/" class="d-inline-block">
+      <h6 class="mb-0 text-white">Juno Project</h6>
+    </a>
+    <span> | By: John Lai</span>
+  </footer>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+</body>
+</html>
