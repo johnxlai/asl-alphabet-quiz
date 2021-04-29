@@ -16,6 +16,7 @@ const correctOrNot = $(".correctOrNot");
 
 const questions = ["a", "c", "i", "r", "y"];
 let points = 0;
+const correctPercentage = $(".correctPercentage");
 
 //remove the item grabed
 
@@ -33,14 +34,19 @@ const updateQuestion = (selectedQuestion) => {
   iImageId.src = `img/${selectedQuestion}.svg`;
 };
 
-// if answer match add to total coorect number
+//Update correct number here
+const updateCorrectNumber = (points) => {
+  correctPercentage.text(points);
+};
 
+// if answer match add to total coorect number
 const checkIfCorrect = (userAnswerValue, selectedQuestion) => {
   console.log(userAnswerValue, selectedQuestion);
   if (userAnswerValue === selectedQuestion) {
     points += 1;
     console.log(points);
     correctOrNot.html("yes baby");
+    updateCorrectNumber(points);
   } else {
     correctOrNot.html("Wrong Son");
     console.log("wrong");
@@ -50,18 +56,23 @@ const checkIfCorrect = (userAnswerValue, selectedQuestion) => {
 //on submit trigger update question
 submitBtn.on("click", function (e) {
   e.preventDefault();
-
-  // get input answer
   const userAnswerValue = userAnswer.val();
-  console.log(userAnswerValue);
 
-  checkIfCorrect(userAnswerValue, selectedQuestion);
+  if (!userAnswerValue) {
+    alert("input something man");
+  } else {
+    // get input answer
+    console.log(userAnswerValue);
 
-  selectedQuestion = randomizeQuestion();
-  updateQuestion(selectedQuestion);
+    checkIfCorrect(userAnswerValue, selectedQuestion);
 
-  // clearValues
-  userAnswer.val("");
+    //getting next question here
+    selectedQuestion = randomizeQuestion();
+    updateQuestion(selectedQuestion);
+
+    // clearValues
+    userAnswer.val("");
+  }
 });
 
 // remove asked qusetion from array
@@ -71,6 +82,8 @@ submitBtn.on("click", function (e) {
 //   console.log(questions);
 // };
 // removeQuestionFromArray();
+
+//on load we want to trigger a random question and update the question, and userAnswerInput will check to see if it is a correct value;
 let selectedQuestion = randomizeQuestion();
 randomizeQuestion();
 updateQuestion(selectedQuestion);

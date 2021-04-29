@@ -72,8 +72,7 @@ body h6 {
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  text-align: center;
 }
 
 .answer .submit input {
@@ -87,7 +86,7 @@ body h6 {
 }
 
 footer {
-  background: #b8d0eb;
+  background: #b298dc;
 }
 
 .bounce-arrow {
