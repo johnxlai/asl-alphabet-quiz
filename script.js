@@ -10,31 +10,59 @@
 const questionGoesHere = $(".questionGoesHere");
 const iImageId = document.querySelector(".i-image");
 
-const questions = ["a", "c", "i", "r", "y"];
-console.log(questions);
+const submitBtn = $('input[type="submit"]');
+const userAnswer = $('input[id="userAnswer"]');
+const correctOrNot = $(".correctOrNot");
 
-//grab one of the item from the array randomly.
+const questions = ["a", "c", "i", "r", "y"];
+let points = 0;
 
 //remove the item grabed
 
-//function to update question
-const updateQuestion = () => {
-  let randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-  console.log(randomQuestion);
-
-  questionGoesHere.html(randomQuestion);
-
-  //updating image path with random number
-  iImageId.src = `img/${randomQuestion}.svg`;
-  console.log(iImageId);
-
-  // if (randomQuestion === iImageId.getAttribute("data-id")) {
-  //   iImageId.classList.remove("hide");
-  // }
+//Get a random question from the array
+const randomizeQuestion = () => {
+  //grab one of the item from the array randomly.
+  return questions[Math.floor(Math.random() * questions.length)];
 };
 
-updateQuestion();
+//function to update question
+const updateQuestion = (selectedQuestion) => {
+  // let randomQuestion = randomizeQuestion;
+  questionGoesHere.html(selectedQuestion);
+  //updating image path with random number
+  iImageId.src = `img/${selectedQuestion}.svg`;
+};
 
-console.log(questionGoesHere);
+// if answer match add to total coorect number
 
-//loop thru all the images and get dataAttrible if match show
+const checkIfCorrect = (userAnswerValue, selectedQuestion) => {
+  console.log(userAnswerValue, selectedQuestion);
+  // if (userAnswerValue === selectedQuestion) {
+  //   points += 1;
+  //   console.log(points);
+  //   correctOrNot.html("yes baby");
+  // } else {
+  //   correctOrNot.html("Wrong Son");
+  //   console.log("wrong");
+
+  // }
+  userAnswer.val("");
+};
+
+//on submit trigger update question
+submitBtn.on("click", function (e) {
+  e.preventDefault();
+
+  // get input answer
+  const userAnswerValue = userAnswer.val();
+  console.log(userAnswerValue);
+
+  let selectedQuestion = randomizeQuestion();
+  updateQuestion(selectedQuestion);
+  checkIfCorrect(userAnswerValue, selectedQuestion);
+
+  //clearValues
+  // userAnswer.val();
+});
+
+// remove asked qusetion from array
