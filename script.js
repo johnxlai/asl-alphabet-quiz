@@ -37,16 +37,14 @@ const updateQuestion = (selectedQuestion) => {
 
 const checkIfCorrect = (userAnswerValue, selectedQuestion) => {
   console.log(userAnswerValue, selectedQuestion);
-  // if (userAnswerValue === selectedQuestion) {
-  //   points += 1;
-  //   console.log(points);
-  //   correctOrNot.html("yes baby");
-  // } else {
-  //   correctOrNot.html("Wrong Son");
-  //   console.log("wrong");
-
-  // }
-  userAnswer.val("");
+  if (userAnswerValue === selectedQuestion) {
+    points += 1;
+    console.log(points);
+    correctOrNot.html("yes baby");
+  } else {
+    correctOrNot.html("Wrong Son");
+    console.log("wrong");
+  }
 };
 
 //on submit trigger update question
@@ -57,12 +55,23 @@ submitBtn.on("click", function (e) {
   const userAnswerValue = userAnswer.val();
   console.log(userAnswerValue);
 
-  let selectedQuestion = randomizeQuestion();
-  updateQuestion(selectedQuestion);
   checkIfCorrect(userAnswerValue, selectedQuestion);
 
-  //clearValues
-  // userAnswer.val();
+  selectedQuestion = randomizeQuestion();
+  updateQuestion(selectedQuestion);
+
+  // clearValues
+  userAnswer.val("");
 });
 
 // remove asked qusetion from array
+// const removeQuestionFromArray = (questions) => {
+//   const index = questions.indexOf(selectedQuestion);
+//   questions.splice(index, 1);
+//   console.log(questions);
+// };
+// removeQuestionFromArray();
+let selectedQuestion = randomizeQuestion();
+randomizeQuestion();
+updateQuestion(selectedQuestion);
+console.log(selectedQuestion);
