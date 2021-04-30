@@ -16,48 +16,91 @@ aslQuiz.questionGoesHere = $(".questionGoesHere");
 aslQuiz.formSubmit = $(".submitForm");
 aslQuiz.userAnswer = $('input[id="userAnswer"]');
 aslQuiz.correctOrNot = $(".correctOrNot");
-aslQuiz.correctPercentage = $(".correctPercentage");
+aslQuiz.totalCorrect = $(".totalCorrect");
+aslQuiz.totalWrong = $(".totalWrong");
+aslQuiz.totalAnsweredHtml = $(".totalAnswered");
+aslQuiz.endResults = $(".endResults");
 aslQuiz.iImageId = document.querySelector(".i-image");
-aslQuiz.points = 0;
+aslQuiz.correctPoints = 0;
+aslQuiz.wrongPoints = 0;
+aslQuiz.totalAnswered = 0;
+aslQuiz.hideOnCompletion = $(".hideOnCompletion");
+aslQuiz.showOnCompletion = $(".showOnCompletion");
 
 //Get a random question from the array
-const randomizeQuestion = () => {
+aslQuiz.randomizeQuestion = () => {
   //grab one of the item from the array randomly.
   const chosenAlphabet =
     aslQuiz.listOfQuestions[
       Math.floor(Math.random() * aslQuiz.listOfQuestions.length)
     ];
 
+  //gets the index of the chosen alphabet from the original array
   const indexOfChosenAlphaBet = aslQuiz.listOfQuestions.indexOf(chosenAlphabet);
-  //returns chosen question and its index number from the original array
+  //returns chosen question and its index number from the original array sd s
   return { chosenAlphabet, indexOfChosenAlphaBet };
 };
 
 //function to update question
-const updateQuestion = (selectedQuestion) => {
-  console.log(selectedQuestion);
-  aslQuiz.questionGoesHere.html(selectedQuestion);
+aslQuiz.updateQuestion = (selectedQuestion) => {
+  //IF YOU WANT TO CHEAT UNCOMMENT LINE BELOW
+  // aslQuiz.questionGoesHere.html(selectedQuestion);
+
   //updating image path with random number
   aslQuiz.iImageId.src = `img/${selectedQuestion}.svg`;
 };
 
 //Update correct number here
-const updateCorrectNumber = (points) => {
-  aslQuiz.correctPercentage.text(points);
+aslQuiz.updateCorrectNumber = (correctPoints) => {
+  aslQuiz.totalCorrect.text(`Correct: ${correctPoints}`);
+  aslQuiz.updateTotalQuestionsAnswer();
+};
+
+//Update correct number here
+aslQuiz.updateWrongNumber = (wrongPoints) => {
+  aslQuiz.totalWrong.text(`Wrong: ${wrongPoints}`);
+  aslQuiz.updateTotalQuestionsAnswer();
+};
+
+//Update Total of questions Answer
+aslQuiz.updateTotalQuestionsAnswer = () => {
+  //add 1 to totalAnswered
+  aslQuiz.totalAnswered++;
+  aslQuiz.totalAnsweredHtml.text(`Total Answered: ${aslQuiz.totalAnswered}`);
 };
 
 // if answer match add to total coorect number
-const checkIfCorrect = (userAnswerValue, selectedQuestion) => {
+aslQuiz.checkIfCorrect = (userAnswerValue, selectedQuestion) => {
   // console.log(userAnswerValue, selectedQuestion);
   if (userAnswerValue.toLowerCase() === selectedQuestion) {
-    aslQuiz.points += 1;
-    console.log(aslQuiz.points);
-    aslQuiz.correctOrNot.html("yes baby");
-    updateCorrectNumber(aslQuiz.points);
+    aslQuiz.correctPoints += 1;
+    aslQuiz.correctOrNot.html("Yes baby!");
+    aslQuiz.updateCorrectNumber(aslQuiz.correctPoints);
   } else {
+    aslQuiz.wrongPoints += 1;
     aslQuiz.correctOrNot.html("Wrong Son");
-    console.log("wrong");
+    aslQuiz.updateWrongNumber(aslQuiz.wrongPoints);
   }
+};
+
+aslQuiz.quizEnded = () => {
+  const finalMark = (aslQuiz.correctPoints / aslQuiz.totalAnswered) * 100;
+  //disable input
+  // show results with perfectage
+  aslQuiz.endResults.html(
+    `Correct: ${aslQuiz.correctPoints}
+    Wrong: ${aslQuiz.wrongPoints}
+    Total Answered: ${aslQuiz.totalAnswered}
+    <h3> You Scored ${finalMark}% </h3>
+    `
+  );
+  // console.log(
+  //   aslQuiz.correctPoints,
+  //   aslQuiz.wrongPoints,
+  //   aslQuiz.totalAnswered
+  // );
+  aslQuiz.hideOnCompletion.hide();
+  aslQuiz.showOnCompletion.show();
 };
 
 //on submit trigger update question
@@ -71,39 +114,44 @@ aslQuiz.formSubmit.on("submit", function (e) {
     } else {
       // get input answer
       console.log(userAnswerValue);
-      checkIfCorrect(userAnswerValue, aslQuiz.selectedQuestion.chosenAlphabet);
+      aslQuiz.checkIfCorrect(
+        userAnswerValue,
+        aslQuiz.selectedQuestion.chosenAlphabet
+      );
       //getting next question here
-      aslQuiz.selectedQuestion = randomizeQuestion();
-      updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
+      aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
+      aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
 
-      removeQuestionFromArray(aslQuiz.selectedQuestion.indexOfChosenAlphaBet);
+      aslQuiz.removeQuestionFromArray(
+        aslQuiz.selectedQuestion.indexOfChosenAlphaBet
+      );
 
       // clearValues
       aslQuiz.userAnswer.val("");
     }
   } else {
-    alert(`Congrats You're done!`);
+    aslQuiz.quizEnded();
   }
 });
 
 //Remove array clicked on
-const removeQuestionFromArray = (indexOfSelectedQuuestion) => {
+aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
   //if array is not empty execute
   aslQuiz.listOfQuestions.splice(indexOfSelectedQuuestion, 1);
   console.log(aslQuiz.listOfQuestions);
 };
 
-aslQuiz.init = function () {
-  // checkIfArrayIsEmpty();
-  //check if array is empty
+///////////////////////INIT
 
-  aslQuiz.selectedQuestion = randomizeQuestion();
-  randomizeQuestion();
-  updateQuestion(
-    aslQuiz.selectedQuestion.chosenAlphabet,
+aslQuiz.init = function () {
+  //on load do these
+  aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
+  aslQuiz.randomizeQuestion();
+
+  aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
+  aslQuiz.removeQuestionFromArray(
     aslQuiz.selectedQuestion.indexOfChosenAlphaBet
   );
-  removeQuestionFromArray(aslQuiz.selectedQuestion.indexOfChosenAlphaBet);
 }; //init
 
 $(function () {

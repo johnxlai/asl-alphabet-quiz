@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Roboto&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Roboto:wght@400;700&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -36,9 +36,9 @@ challenge for them! -->
   <header class="mt-auto text-center">
       <h1 class="mt-3">Asl Alphabet Quiz</h1>
   </header>
-  <section class="mt-3">
-    <article class="question p-4 text-center">
-        <h2 class="questionGoesHere mb-0">QUESTION GOES HERE</h2>
+  <section class="mt-3 hideOnCompletion">
+    <article class="question p-4 mx-auto">
+        <h2 class="questionGoesHere mb-0"></h2>
         <img src="img/a.svg" alt="" class="i-image" data-id="">
     </article>
     <article class="answer text-center my-3">
@@ -61,17 +61,24 @@ challenge for them! -->
         </div>
       </form>
     </article>
-    <article>
-        <div class="total-correct text-center">
+    <article class="pointsCounter">
+        <div class="text-center">
           <p class="correctOrNot"></p>
-          <p class="mb-1">Total Correct <span class="totalCorrectAnswer">Number Here</span></p>
-          <p class="correctPercentage">%%%</p>
+          <p class="mb-1">
+            <span class="totalCorrect"></span>
+            <span class="totalWrong"></span>
+            <span class="totalAnswered"></span>
+          </p>
         </div>
     </article>
   </section>
-  <footer class="mt-auto w-100 p-3 text-center">
-    <a href="https://junocollege.com/" class="d-inline-block">
-      <h6 class="mb-0 text-white">Juno Project</h6>
+  <section class="mt-3 showOnCompletion">
+    <div class="endResults text-center">
+    </div>
+  </section>
+  <footer class="mt-auto w-100 p-3 text-center small">
+    <a href="https://junocollege.com/" class="d-inline-block ">
+      <h6 class="mb-0 small text-white">Juno Project</h6>
     </a>
     <span> | By: John Lai</span>
   </footer>

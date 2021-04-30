@@ -27,14 +27,14 @@ body {
   width: 100%;
   height: 100vh;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Noto Serif", serif;
-  }
+  // h1,
+  // h2,
+  // h3,
+  // h4,
+  // h5,
+  // h6 {
+  //   font-family: "Noto Serif", serif;
+  // }
 }
 
 .question {
@@ -77,6 +77,24 @@ body {
       width: 100%;
       border-radius: 4px;
     }
+  }
+}
+
+.pointsCounter {
+  .totalCorrect {
+    font-family: "Happy Monkey", cursive;
+    color: #bada55;
+    padding: 5px;
+  }
+  .totalWrong {
+    font-family: "Happy Monkey", cursive;
+    color: #f76262;
+    padding: 5px;
+  }
+  .totalAnswered {
+    font-family: "Happy Monkey", cursive;
+    color: white;
+    font-weight: bold;
   }
 }
 
