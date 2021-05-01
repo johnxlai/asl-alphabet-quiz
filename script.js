@@ -173,6 +173,7 @@ aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
 
 aslQuiz.init = function () {
   aslQuiz.hideOnCompletion.hide();
+  aslQuiz.showOnCompletion.hide();
   //on load do these
   aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
   aslQuiz.randomizeQuestion();
