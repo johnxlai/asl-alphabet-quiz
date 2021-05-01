@@ -35,10 +35,10 @@ aslQuiz.totalCorrect = $(".totalCorrect");
 aslQuiz.totalWrong = $(".totalWrong");
 aslQuiz.totalAnsweredHtml = $(".totalAnswered");
 aslQuiz.finalResults = $(".finalResults");
-aslQuiz.correctPoints = 0;
-aslQuiz.wrongPoints = 0;
-aslQuiz.totalAnswered = 0;
-aslQuiz.seconds = 0;
+aslQuiz.correctPoints;
+aslQuiz.wrongPoints;
+aslQuiz.totalAnswered;
+aslQuiz.seconds;
 aslQuiz.countDownInterval;
 
 //start timer
