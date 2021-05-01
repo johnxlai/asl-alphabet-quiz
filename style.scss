@@ -102,22 +102,20 @@ body {
   }
 }
 
-.pointsCounter {
-  .totalCorrect {
-    font-family: "Happy Monkey", cursive;
-    color: #bada55;
-    padding: 5px;
-  }
-  .totalWrong {
-    font-family: "Happy Monkey", cursive;
-    color: #f76262;
-    padding: 5px;
-  }
-  .totalAnswered {
-    font-family: "Happy Monkey", cursive;
-    color: white;
-    font-weight: bold;
-  }
+.totalCorrect {
+  font-family: "Happy Monkey", cursive;
+  color: #bada55;
+  padding: 5px;
+}
+.totalWrong {
+  font-family: "Happy Monkey", cursive;
+  color: #f76262;
+  padding: 5px;
+}
+.totalAnswered {
+  font-family: "Happy Monkey", cursive;
+  color: white;
+  font-weight: bold;
 }
 
 footer {

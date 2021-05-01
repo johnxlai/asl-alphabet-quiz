@@ -14,36 +14,55 @@ const aslQuiz = {};
 //making array from a - z
 aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
 aslQuiz.startQuiz = $(".startQuiz");
-aslQuiz.hideOnAppInit = $(".hideOnAppInit");
 aslQuiz.timer = $(".timer");
 aslQuiz.questionGoesHere = $(".questionGoesHere");
-aslQuiz.formSubmit = $(".submitForm");
 aslQuiz.userAnswer = $('input[id="userAnswer"]');
-aslQuiz.iImageId = document.querySelector(".i-image");
+aslQuiz.imageSrc = document.querySelector(".svg-image");
 
-//Updating Correct or Not Comments and points
+//btns
+aslQuiz.startQuizBtn = $(".startQuiz");
+aslQuiz.formSubmit = $(".submitForm");
+aslQuiz.restartBtn = $(".restartBtn");
+
+//step selectors
+aslQuiz.stepOne = $(".stepOne");
+aslQuiz.stepTwo = $(".stepTwo");
+aslQuiz.stepThree = $(".stepThree");
+
+//Updating Correct or Not Comments and points counter
 aslQuiz.correctOrNot = $(".correctOrNot");
 aslQuiz.totalCorrect = $(".totalCorrect");
 aslQuiz.totalWrong = $(".totalWrong");
 aslQuiz.totalAnsweredHtml = $(".totalAnswered");
-aslQuiz.endResults = $(".endResults");
+aslQuiz.finalResults = $(".finalResults");
 aslQuiz.correctPoints = 0;
 aslQuiz.wrongPoints = 0;
 aslQuiz.totalAnswered = 0;
-aslQuiz.hideOnCompletion = $(".hideOnCompletion");
-aslQuiz.showOnCompletion = $(".showOnCompletion");
-aslQuiz.restartBtn = $(".restartBtn");
+aslQuiz.seconds = 0;
+aslQuiz.countDownInterval;
 
 //start timer
-aslQuiz.startQuiz.on("click", function () {
-  aslQuiz.hideOnAppInit.hide();
-  aslQuiz.hideOnCompletion.show();
+aslQuiz.startQuiz = () => {
+  aslQuiz.correctPoints = 0;
+  aslQuiz.wrongPoints = 0;
+  aslQuiz.totalAnswered = 0;
+  // aslQuiz.updateTotalQuestionsAnswer(0);
+  aslQuiz.totalAnsweredHtml.text(``);
+  aslQuiz.totalCorrect.text(``);
+  aslQuiz.totalWrong.text(``);
+  aslQuiz.correctOrNot.text(``);
+  //set inital seconds here
+  aslQuiz.seconds = 10;
+  aslQuiz.stepOne.hide();
+  aslQuiz.stepThree.hide();
+
+  aslQuiz.stepTwo.show();
   aslQuiz.startCountDown();
-});
+};
+
+aslQuiz.startQuizBtn.on("click", aslQuiz.startQuiz);
 
 //count Down every 1 sec
-aslQuiz.seconds = 30;
-aslQuiz.countDownInterval;
 
 aslQuiz.startCountDown = () => {
   aslQuiz.countDownInterval = setInterval(() => {
@@ -85,7 +104,7 @@ aslQuiz.updateQuestion = (selectedQuestion) => {
   // aslQuiz.questionGoesHere.html(selectedQuestion);
 
   //updating image path with random number
-  aslQuiz.iImageId.src = `img/${selectedQuestion}.svg`;
+  aslQuiz.imageSrc.src = `img/${selectedQuestion}.svg`;
 };
 
 //Update correct number here
@@ -126,20 +145,9 @@ aslQuiz.quizEnded = () => {
     (aslQuiz.correctPoints / aslQuiz.totalAnswered) * 100
   );
   // show results with perfectage
-  aslQuiz.endResults.html(
-    `Correct: ${aslQuiz.correctPoints}
-    Wrong: ${aslQuiz.wrongPoints}
-    Total Answered: ${aslQuiz.totalAnswered}
-    <h3> You Scored ${finalMark}% </h3>
-    `
-  );
-  // console.log(
-  //   aslQuiz.correctPoints,
-  //   aslQuiz.wrongPoints,
-  //   aslQuiz.totalAnswered
-  // );
-  aslQuiz.hideOnCompletion.hide();
-  aslQuiz.showOnCompletion.show();
+  aslQuiz.finalResults.html(`<h3>You Scored ${finalMark}% </h3>`);
+  aslQuiz.stepTwo.hide();
+  aslQuiz.stepThree.show();
 };
 
 //on submit trigger update question
@@ -182,16 +190,28 @@ aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
 
 //Restart App Function
 
-aslQuiz.restartBtn.on("click", function () {});
+aslQuiz.restartBtn.on("click", function () {
+  aslQuiz.startQuiz();
+  // aslQuiz.stepThree.hide();
+  aslQuiz.randomizeQuestion();
+  //select a question
+  aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
+
+  aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
+  aslQuiz.removeQuestionFromArray(
+    aslQuiz.selectedQuestion.indexOfChosenAlphaBet
+  );
+});
 
 ///////////////////////INIT
 
 aslQuiz.init = function () {
-  aslQuiz.hideOnCompletion.hide();
-  aslQuiz.showOnCompletion.hide();
-  //on load do these
-  aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
+  aslQuiz.stepTwo.hide();
+  aslQuiz.stepThree.hide();
   aslQuiz.randomizeQuestion();
+
+  //select a question
+  aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
 
   aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
   aslQuiz.removeQuestionFromArray(

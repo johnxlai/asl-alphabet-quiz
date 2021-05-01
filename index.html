@@ -37,7 +37,7 @@ challenge for them! -->
       <h1 class="mt-3">Asl Alphabet Quiz</h1>
   </header>
   <section>
-    <article class="hideOnAppInit text-center m-3">
+    <article class="stepOne text-center m-3">
         <h2 class="h4">How many can you name in 30 secs?</h2>
         <div class="how-to-play small">
           <p>How to play: You will be shown an image of an asl alphabet sign, type in the answer in the input field, (click on the
@@ -48,13 +48,13 @@ challenge for them! -->
         <button class="startQuiz">Start Quiz</button>
     </article>
   </section>
-  <section class="mt-3 hideOnCompletion text-center">
+  <section class="mt-3 stepTwo text-center">
     <article>
       <div class="timer mb-2 px-2 py-3 d-inline-block font-weight-bold">30</div>
     </article>
     <article class="question p-4 mx-auto">
         <h2 class="questionGoesHere mb-0"></h2>
-        <img src="img/a.svg" alt="" class="i-image" data-id="">
+        <img src="img/a.svg" alt="" class="svg-image" data-id="">
     </article>
     <article class="answer text-center my-3">
       <form action="" method="get" class="submitForm">
@@ -87,8 +87,14 @@ challenge for them! -->
         </div>
     </article>
   </section>
-  <section class="mt-3 showOnCompletion text-center">
-    <div class="endResults text-center"></div>
+  <section class="mt-3 stepThree text-center">
+    <p>
+      <span class="totalCorrect"></span>
+      <span class="totalWrong"></span>
+      <span class="totalAnswered"></span>
+    </p>
+    <div class="finalResults text-center">
+    </div>
     <button class="restartBtn">Restart</button>
   </section>
   <footer class="mt-auto w-100 p-3 text-center">

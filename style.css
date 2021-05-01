@@ -104,19 +104,19 @@ body {
   border-radius: 4px;
 }
 
-.pointsCounter .totalCorrect {
+.totalCorrect {
   font-family: "Happy Monkey", cursive;
   color: #bada55;
   padding: 5px;
 }
 
-.pointsCounter .totalWrong {
+.totalWrong {
   font-family: "Happy Monkey", cursive;
   color: #f76262;
   padding: 5px;
 }
 
-.pointsCounter .totalAnswered {
+.totalAnswered {
   font-family: "Happy Monkey", cursive;
   color: white;
   font-weight: bold;
