@@ -36,6 +36,18 @@ body {
   //   font-family: "Noto Serif", serif;
   // }
 }
+.startQuiz {
+  background-color: #45a049;
+  color: white;
+  border: 0;
+  padding: 8px 16px;
+  margin-top: 16px;
+  width: 100%;
+  border-radius: 4px;
+}
+.timer {
+  color: $celeste;
+}
 
 .question {
   background: $amethyst;
@@ -127,4 +139,7 @@ footer {
 
 .hide {
   display: none;
+}
+.endResults {
+  color: $celeste;
 }

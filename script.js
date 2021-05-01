@@ -11,7 +11,11 @@
 // toDoApp.init();
 const aslQuiz = {};
 
-aslQuiz.listOfQuestions = ["a", "c", "i", "r", "y"];
+//making array from a - z
+aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
+aslQuiz.startQuiz = $(".startQuiz");
+aslQuiz.hideOnAppInit = $(".hideOnAppInit");
+aslQuiz.timer = $(".timer");
 aslQuiz.questionGoesHere = $(".questionGoesHere");
 aslQuiz.formSubmit = $(".submitForm");
 aslQuiz.userAnswer = $('input[id="userAnswer"]');
@@ -26,6 +30,30 @@ aslQuiz.wrongPoints = 0;
 aslQuiz.totalAnswered = 0;
 aslQuiz.hideOnCompletion = $(".hideOnCompletion");
 aslQuiz.showOnCompletion = $(".showOnCompletion");
+
+//start timer
+aslQuiz.startQuiz.on("click", function () {
+  aslQuiz.hideOnAppInit.hide();
+  aslQuiz.hideOnCompletion.show();
+  startCountDown();
+});
+
+//count Down every 1 sec
+let seconds = 5;
+let countDownInterval;
+
+const startCountDown = () => {
+  countDownInterval = setInterval(() => {
+    seconds--;
+    aslQuiz.timer.text(seconds);
+
+    if (seconds <= 0) {
+      clearInterval(countDownInterval);
+      // aslQuiz.timer.text(`TimesUP`);
+      aslQuiz.quizEnded();
+    }
+  }, 1000);
+};
 
 //Get a random question from the array
 aslQuiz.randomizeQuestion = () => {
@@ -44,7 +72,7 @@ aslQuiz.randomizeQuestion = () => {
 //function to update question
 aslQuiz.updateQuestion = (selectedQuestion) => {
   //IF YOU WANT TO CHEAT UNCOMMENT LINE BELOW
-  // aslQuiz.questionGoesHere.html(selectedQuestion);
+  aslQuiz.questionGoesHere.html(selectedQuestion);
 
   //updating image path with random number
   aslQuiz.iImageId.src = `img/${selectedQuestion}.svg`;
@@ -144,6 +172,7 @@ aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
 ///////////////////////INIT
 
 aslQuiz.init = function () {
+  aslQuiz.hideOnCompletion.hide();
   //on load do these
   aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
   aslQuiz.randomizeQuestion();

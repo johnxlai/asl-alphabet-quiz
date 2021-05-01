@@ -36,7 +36,16 @@ challenge for them! -->
   <header class="mt-auto text-center">
       <h1 class="mt-3">Asl Alphabet Quiz</h1>
   </header>
-  <section class="mt-3 hideOnCompletion">
+  <section>
+    <article class="hideOnAppInit">
+        <h2 class="h4">How many can you name in 30 secs?</h2>
+        <button class="startQuiz">Start Quiz</button>
+    </article>
+  </section>
+  <section class="mt-3 hideOnCompletion text-center">
+    <article>
+      <div class="timer mb-2 px-2 py-3 d-inline-block font-weight-bold">30</div>
+    </article>
     <article class="question p-4 mx-auto">
         <h2 class="questionGoesHere mb-0"></h2>
         <img src="img/a.svg" alt="" class="i-image" data-id="">
@@ -76,11 +85,11 @@ challenge for them! -->
     <div class="endResults text-center">
     </div>
   </section>
-  <footer class="mt-auto w-100 p-3 text-center small">
+  <footer class="mt-auto w-100 p-3 text-center">
     <a href="https://junocollege.com/" class="d-inline-block ">
       <h6 class="mb-0 small text-white">Juno Project</h6>
     </a>
-    <span> | By: John Lai</span>
+    <span class="small"> | By: John Lai</span>
   </footer>
   <script src="script.js"></script>
   <link rel="stylesheet" href="style.css">

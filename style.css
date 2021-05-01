@@ -19,6 +19,20 @@ body {
   height: 100vh;
 }
 
+.startQuiz {
+  background-color: #45a049;
+  color: white;
+  border: 0;
+  padding: 8px 16px;
+  margin-top: 16px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.timer {
+  color: #b9faf8;
+}
+
 .question {
   background: #a663cc;
   color: #b9faf8;
@@ -146,5 +160,9 @@ footer {
 
 .hide {
   display: none;
+}
+
+.endResults {
+  color: #b9faf8;
 }
 /*# sourceMappingURL=style.css.map */
