@@ -19,45 +19,47 @@ aslQuiz.timer = $(".timer");
 aslQuiz.questionGoesHere = $(".questionGoesHere");
 aslQuiz.formSubmit = $(".submitForm");
 aslQuiz.userAnswer = $('input[id="userAnswer"]');
+aslQuiz.iImageId = document.querySelector(".i-image");
+
+//Updating Correct or Not Comments and points
 aslQuiz.correctOrNot = $(".correctOrNot");
 aslQuiz.totalCorrect = $(".totalCorrect");
 aslQuiz.totalWrong = $(".totalWrong");
 aslQuiz.totalAnsweredHtml = $(".totalAnswered");
 aslQuiz.endResults = $(".endResults");
-aslQuiz.iImageId = document.querySelector(".i-image");
 aslQuiz.correctPoints = 0;
 aslQuiz.wrongPoints = 0;
 aslQuiz.totalAnswered = 0;
 aslQuiz.hideOnCompletion = $(".hideOnCompletion");
 aslQuiz.showOnCompletion = $(".showOnCompletion");
+aslQuiz.restartBtn = $(".restartBtn");
 
 //start timer
 aslQuiz.startQuiz.on("click", function () {
   aslQuiz.hideOnAppInit.hide();
   aslQuiz.hideOnCompletion.show();
-  startCountDown();
+  aslQuiz.startCountDown();
 });
 
 //count Down every 1 sec
-let seconds = 30;
-let countDownInterval;
+aslQuiz.seconds = 30;
+aslQuiz.countDownInterval;
 
-const startCountDown = () => {
-  countDownInterval = setInterval(() => {
-    seconds--;
-    aslQuiz.timer.text(seconds);
+aslQuiz.startCountDown = () => {
+  aslQuiz.countDownInterval = setInterval(() => {
+    aslQuiz.seconds--;
+    aslQuiz.timer.text(aslQuiz.seconds);
 
-    if (seconds <= 10) {
+    if (aslQuiz.seconds <= 10) {
       aslQuiz.timer.css("color", "yellow");
     }
 
-    if (seconds <= 5) {
+    if (aslQuiz.seconds <= 5) {
       aslQuiz.timer.css("color", "red");
     }
 
-    if (seconds <= 0) {
-      clearInterval(countDownInterval);
-      // aslQuiz.timer.text(`TimesUP`);
+    if (aslQuiz.seconds <= 0) {
+      clearInterval(aslQuiz.countDownInterval);
       aslQuiz.quizEnded();
     }
   }, 1000);
@@ -120,8 +122,9 @@ aslQuiz.checkIfCorrect = (userAnswerValue, selectedQuestion) => {
 };
 
 aslQuiz.quizEnded = () => {
-  const finalMark = (aslQuiz.correctPoints / aslQuiz.totalAnswered) * 100;
-  //disable input
+  const finalMark = Math.round(
+    (aslQuiz.correctPoints / aslQuiz.totalAnswered) * 100
+  );
   // show results with perfectage
   aslQuiz.endResults.html(
     `Correct: ${aslQuiz.correctPoints}
@@ -176,6 +179,10 @@ aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
   aslQuiz.listOfQuestions.splice(indexOfSelectedQuuestion, 1);
   console.log(aslQuiz.listOfQuestions);
 };
+
+//Restart App Function
+
+aslQuiz.restartBtn.on("click", function () {});
 
 ///////////////////////INIT
 

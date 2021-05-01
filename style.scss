@@ -36,15 +36,21 @@ body {
   //   font-family: "Noto Serif", serif;
   // }
 }
-.startQuiz {
+.startQuiz,
+.restartBtn {
   background-color: #45a049;
   color: white;
   border: 0;
   padding: 8px 16px;
   margin-top: 16px;
-  width: 100%;
   border-radius: 4px;
+  width: 50%;
+
+  @media only screen and (max-width: 500px) {
+    width: 100%;
+  }
 }
+
 .timer {
   color: $celeste;
 }
@@ -60,7 +66,11 @@ body {
   align-items: center;
   flex-direction: column;
 }
-
+.how-to-play {
+  width: 50%;
+  margin: 0 auto;
+  color: lightcyan;
+}
 .answer {
   .userInput {
     display: flex;

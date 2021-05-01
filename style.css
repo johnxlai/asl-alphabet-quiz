@@ -19,14 +19,22 @@ body {
   height: 100vh;
 }
 
-.startQuiz {
+.startQuiz,
+.restartBtn {
   background-color: #45a049;
   color: white;
   border: 0;
   padding: 8px 16px;
   margin-top: 16px;
-  width: 100%;
   border-radius: 4px;
+  width: 50%;
+}
+
+@media only screen and (max-width: 500px) {
+  .startQuiz,
+  .restartBtn {
+    width: 100%;
+  }
 }
 
 .timer {
@@ -52,6 +60,12 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.how-to-play {
+  width: 50%;
+  margin: 0 auto;
+  color: lightcyan;
 }
 
 .answer .userInput {
