@@ -39,13 +39,21 @@ aslQuiz.startQuiz.on("click", function () {
 });
 
 //count Down every 1 sec
-let seconds = 5;
+let seconds = 30;
 let countDownInterval;
 
 const startCountDown = () => {
   countDownInterval = setInterval(() => {
     seconds--;
     aslQuiz.timer.text(seconds);
+
+    if (seconds <= 10) {
+      aslQuiz.timer.css("color", "yellow");
+    }
+
+    if (seconds <= 5) {
+      aslQuiz.timer.css("color", "red");
+    }
 
     if (seconds <= 0) {
       clearInterval(countDownInterval);
@@ -72,7 +80,7 @@ aslQuiz.randomizeQuestion = () => {
 //function to update question
 aslQuiz.updateQuestion = (selectedQuestion) => {
   //IF YOU WANT TO CHEAT UNCOMMENT LINE BELOW
-  aslQuiz.questionGoesHere.html(selectedQuestion);
+  // aslQuiz.questionGoesHere.html(selectedQuestion);
 
   //updating image path with random number
   aslQuiz.iImageId.src = `img/${selectedQuestion}.svg`;
