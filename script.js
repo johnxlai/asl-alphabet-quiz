@@ -41,8 +41,16 @@ aslQuiz.totalAnswered;
 aslQuiz.seconds;
 aslQuiz.countDownInterval;
 
+//focus input for ux, instead of mouse click
+aslQuiz.setFocusToInput = () => {
+  aslQuiz.userAnswer[0].focus();
+};
+
 //start timer
 aslQuiz.startQuiz = () => {
+  //set inital seconds here
+  aslQuiz.seconds = 5;
+
   aslQuiz.correctPoints = 0;
   aslQuiz.wrongPoints = 0;
   aslQuiz.totalAnswered = 0;
@@ -51,13 +59,23 @@ aslQuiz.startQuiz = () => {
   aslQuiz.totalCorrect.text(``);
   aslQuiz.totalWrong.text(``);
   aslQuiz.correctOrNot.text(``);
-  //set inital seconds here
-  aslQuiz.seconds = 10;
+
   aslQuiz.stepOne.hide();
   aslQuiz.stepThree.hide();
 
   aslQuiz.stepTwo.show();
+  aslQuiz.setFocusToInput();
+
   aslQuiz.startCountDown();
+  aslQuiz.randomizeQuestion();
+
+  //select a question
+  aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
+
+  aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
+  aslQuiz.removeQuestionFromArray(
+    aslQuiz.selectedQuestion.indexOfChosenAlphaBet
+  );
 };
 
 aslQuiz.startQuizBtn.on("click", aslQuiz.startQuiz);
@@ -144,8 +162,14 @@ aslQuiz.quizEnded = () => {
   const finalMark = Math.round(
     (aslQuiz.correctPoints / aslQuiz.totalAnswered) * 100
   );
+
+  //out of the array length
+  const finalMarkOutOf26 = Math.round((aslQuiz.correctPoints / 26) * 100);
   // show results with perfectage
-  aslQuiz.finalResults.html(`<h3>You Scored ${finalMark}% </h3>`);
+  aslQuiz.finalResults.html(
+    `<h3>${finalMark}% of your answers were correct</h3>
+     <h6>You got ${aslQuiz.correctPoints} out of 26 = ${finalMarkOutOf26}% overall</h6>`
+  );
   aslQuiz.stepTwo.hide();
   aslQuiz.stepThree.show();
 };
@@ -158,6 +182,7 @@ aslQuiz.formSubmit.on("submit", function (e) {
   if (aslQuiz.listOfQuestions.length) {
     if (!userAnswerValue) {
       alert("input something fam");
+      aslQuiz.setFocusToInput();
     } else {
       // get input answer
       console.log(userAnswerValue);
@@ -175,6 +200,7 @@ aslQuiz.formSubmit.on("submit", function (e) {
 
       // clearValues
       aslQuiz.userAnswer.val("");
+      aslQuiz.setFocusToInput();
     }
   } else {
     aslQuiz.quizEnded();
@@ -208,15 +234,6 @@ aslQuiz.restartBtn.on("click", function () {
 aslQuiz.init = function () {
   aslQuiz.stepTwo.hide();
   aslQuiz.stepThree.hide();
-  aslQuiz.randomizeQuestion();
-
-  //select a question
-  aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
-
-  aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
-  aslQuiz.removeQuestionFromArray(
-    aslQuiz.selectedQuestion.indexOfChosenAlphaBet
-  );
 }; //init
 
 $(function () {
