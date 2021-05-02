@@ -53,9 +53,8 @@ aslQuiz.startQuiz = () => {
   aslQuiz.correctPoints = 0;
   aslQuiz.wrongPoints = 0;
   aslQuiz.totalAnswered = 0;
-
   //set inital seconds here
-  aslQuiz.seconds = 5;
+  aslQuiz.seconds = 30;
 
   // clear all text fields from last entry
   aslQuiz.totalAnsweredHtml.text(``);
@@ -123,7 +122,7 @@ aslQuiz.randomizeQuestion = () => {
 //function to update question
 aslQuiz.updateQuestion = (selectedQuestion) => {
   //IF YOU WANT TO CHEAT UNCOMMENT LINE BELOW
-  aslQuiz.questionGoesHere.html(selectedQuestion);
+  // aslQuiz.questionGoesHere.html(selectedQuestion);
 
   //updating image path with random number
   aslQuiz.imageSrc.src = `img/${selectedQuestion}.svg`;
@@ -135,7 +134,7 @@ aslQuiz.updateCorrectNumber = (correctPoints) => {
   aslQuiz.updateTotalQuestionsAnswer();
 };
 
-//Update correct number here
+//Update wrong number here
 aslQuiz.updateWrongNumber = (wrongPoints) => {
   aslQuiz.totalWrong.text(`Wrong: ${wrongPoints}`);
   aslQuiz.updateTotalQuestionsAnswer();
@@ -163,17 +162,22 @@ aslQuiz.checkIfCorrect = (userAnswerValue, selectedQuestion) => {
 };
 
 aslQuiz.quizEnded = () => {
-  const finalMark = Math.round(
-    (aslQuiz.correctPoints / aslQuiz.totalAnswered) * 100
-  );
+  if (aslQuiz.totalAnswered) {
+    const finalMark = Math.round(
+      (aslQuiz.correctPoints / aslQuiz.totalAnswered) * 100
+    );
 
-  //out of the array length
-  const finalMarkOutOf26 = Math.round((aslQuiz.correctPoints / 26) * 100);
-  // show results with perfectage
-  aslQuiz.finalResults.html(
-    `<h3>${finalMark}% of your answers were correct</h3>
+    //out of the array length
+    const finalMarkOutOf26 = Math.round((aslQuiz.correctPoints / 26) * 100);
+    // show results with perfectage
+    aslQuiz.finalResults.html(
+      `<h3>${finalMark}% of your answers were correct</h3>
      <h6>You got ${aslQuiz.correctPoints} out of 26 = ${finalMarkOutOf26}% overall</h6>`
-  );
+    );
+  } else {
+    aslQuiz.finalResults.html(`<h3>Did you fall asleep?</h3>`);
+  }
+
   aslQuiz.stepTwo.hide();
   aslQuiz.stepThree.show();
 };
@@ -215,7 +219,6 @@ aslQuiz.formSubmit.on("submit", function (e) {
 aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
   //if array is not empty execute
   aslQuiz.listOfQuestions.splice(indexOfSelectedQuuestion, 1);
-  console.log(aslQuiz.listOfQuestions);
 };
 
 //Restart App Function
