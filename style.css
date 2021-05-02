@@ -172,11 +172,14 @@ footer {
   max-width: 100%;
 }
 
-.hide {
-  display: none;
+.finalResults {
+  color: #b9faf8;
 }
 
-.endResults {
-  color: #b9faf8;
+.beforeTimerFinished {
+  background-color: #b9faf8;
+  color: #6f2dbd;
+  padding: 10px 12px;
+  display: inline-block;
 }
 /*# sourceMappingURL=style.css.map */

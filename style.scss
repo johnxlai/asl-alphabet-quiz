@@ -145,9 +145,13 @@ footer {
   max-width: 100%;
 }
 
-.hide {
-  display: none;
-}
-.endResults {
+.finalResults {
   color: $celeste;
+}
+
+.beforeTimerFinished {
+  background-color: $celeste;
+  color: $french-violet;
+  padding: 10px 12px;
+  display: inline-block;
 }

@@ -40,6 +40,7 @@ aslQuiz.totalCorrect = $(".totalCorrect");
 aslQuiz.totalWrong = $(".totalWrong");
 aslQuiz.totalAnsweredHtml = $(".totalAnswered");
 aslQuiz.finalResults = $(".finalResults");
+aslQuiz.beforeTimerFinished = $(".beforeTimerFinished");
 
 //focus input for ux, instead of mouse click
 aslQuiz.setFocusToInput = () => {
@@ -49,7 +50,8 @@ aslQuiz.setFocusToInput = () => {
 //start timer
 aslQuiz.startQuiz = () => {
   //reset values
-  aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
+  // aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
+  aslQuiz.listOfQuestions = ["a", "b", "c"];
   aslQuiz.correctPoints = 0;
   aslQuiz.wrongPoints = 0;
   aslQuiz.totalAnswered = 0;
@@ -61,6 +63,7 @@ aslQuiz.startQuiz = () => {
   aslQuiz.totalCorrect.text(``);
   aslQuiz.totalWrong.text(``);
   aslQuiz.correctOrNot.text(``);
+  aslQuiz.timer.text(``);
   aslQuiz.userAnswer.val("");
 
   //hide step one - instructions and step three - final results
@@ -174,6 +177,7 @@ aslQuiz.quizEnded = () => {
       `<h3>${finalMark}% of your answers were correct</h3>
      <h6>You got ${aslQuiz.correctPoints} out of 26 = ${finalMarkOutOf26}% overall</h6>`
     );
+    //if user didn't answer a single question
   } else {
     aslQuiz.finalResults.html(`<h3>Did you fall asleep?</h3>`);
   }
@@ -187,13 +191,15 @@ aslQuiz.formSubmit.on("submit", function (e) {
   e.preventDefault();
   const userAnswerValue = aslQuiz.userAnswer.val();
 
-  if (aslQuiz.listOfQuestions.length) {
+  // if array is empty end Quiz and display result
+  if (aslQuiz.listOfQuestions.length > 0) {
+    // if input field is empty tell user to input something
     if (!userAnswerValue) {
       alert("input something fam");
       aslQuiz.setFocusToInput();
     } else {
       // get input answer
-      console.log(userAnswerValue);
+
       aslQuiz.checkIfCorrect(
         userAnswerValue,
         aslQuiz.selectedQuestion.chosenAlphabet
@@ -211,13 +217,16 @@ aslQuiz.formSubmit.on("submit", function (e) {
       aslQuiz.setFocusToInput();
     }
   } else {
+    // finished before timer
+    aslQuiz.stepThree.prepend(
+      `<h3 class="beforeTimerFinished">Wow, You finished in ${aslQuiz.seconds} secs! </h3>`
+    );
     aslQuiz.quizEnded();
   }
 });
 
 //Remove array clicked on
 aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
-  //if array is not empty execute
   aslQuiz.listOfQuestions.splice(indexOfSelectedQuuestion, 1);
 };
 
