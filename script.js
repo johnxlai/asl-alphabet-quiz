@@ -12,7 +12,12 @@
 const aslQuiz = {};
 
 //making array from a - z
-aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
+aslQuiz.listOfQuestions;
+aslQuiz.correctPoints;
+aslQuiz.wrongPoints;
+aslQuiz.totalAnswered;
+aslQuiz.seconds;
+aslQuiz.countDownInterval;
 aslQuiz.startQuiz = $(".startQuiz");
 aslQuiz.timer = $(".timer");
 aslQuiz.questionGoesHere = $(".questionGoesHere");
@@ -35,11 +40,6 @@ aslQuiz.totalCorrect = $(".totalCorrect");
 aslQuiz.totalWrong = $(".totalWrong");
 aslQuiz.totalAnsweredHtml = $(".totalAnswered");
 aslQuiz.finalResults = $(".finalResults");
-aslQuiz.correctPoints;
-aslQuiz.wrongPoints;
-aslQuiz.totalAnswered;
-aslQuiz.seconds;
-aslQuiz.countDownInterval;
 
 //focus input for ux, instead of mouse click
 aslQuiz.setFocusToInput = () => {
@@ -48,28 +48,32 @@ aslQuiz.setFocusToInput = () => {
 
 //start timer
 aslQuiz.startQuiz = () => {
-  //set inital seconds here
-  aslQuiz.seconds = 5;
-
+  //reset values
+  aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
   aslQuiz.correctPoints = 0;
   aslQuiz.wrongPoints = 0;
   aslQuiz.totalAnswered = 0;
-  // aslQuiz.updateTotalQuestionsAnswer(0);
+
+  //set inital seconds here
+  aslQuiz.seconds = 5;
+
+  // clear all text fields from last entry
   aslQuiz.totalAnsweredHtml.text(``);
   aslQuiz.totalCorrect.text(``);
   aslQuiz.totalWrong.text(``);
   aslQuiz.correctOrNot.text(``);
+  aslQuiz.userAnswer.val("");
 
+  //hide step one - instructions and step three - final results
   aslQuiz.stepOne.hide();
   aslQuiz.stepThree.hide();
 
+  //show actual game page and focus input
   aslQuiz.stepTwo.show();
   aslQuiz.setFocusToInput();
-
   aslQuiz.startCountDown();
-  aslQuiz.randomizeQuestion();
 
-  //select a question
+  //select a question to show first question on load
   aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
 
   aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
@@ -112,14 +116,14 @@ aslQuiz.randomizeQuestion = () => {
 
   //gets the index of the chosen alphabet from the original array
   const indexOfChosenAlphaBet = aslQuiz.listOfQuestions.indexOf(chosenAlphabet);
-  //returns chosen question and its index number from the original array sd s
+  //returns chosen question and its index number from the original array
   return { chosenAlphabet, indexOfChosenAlphaBet };
 };
 
 //function to update question
 aslQuiz.updateQuestion = (selectedQuestion) => {
   //IF YOU WANT TO CHEAT UNCOMMENT LINE BELOW
-  // aslQuiz.questionGoesHere.html(selectedQuestion);
+  aslQuiz.questionGoesHere.html(selectedQuestion);
 
   //updating image path with random number
   aslQuiz.imageSrc.src = `img/${selectedQuestion}.svg`;
@@ -215,18 +219,8 @@ aslQuiz.removeQuestionFromArray = (indexOfSelectedQuuestion) => {
 };
 
 //Restart App Function
-
 aslQuiz.restartBtn.on("click", function () {
   aslQuiz.startQuiz();
-  // aslQuiz.stepThree.hide();
-  aslQuiz.randomizeQuestion();
-  //select a question
-  aslQuiz.selectedQuestion = aslQuiz.randomizeQuestion();
-
-  aslQuiz.updateQuestion(aslQuiz.selectedQuestion.chosenAlphabet);
-  aslQuiz.removeQuestionFromArray(
-    aslQuiz.selectedQuestion.indexOfChosenAlphaBet
-  );
 });
 
 ///////////////////////INIT
