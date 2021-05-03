@@ -41,6 +41,7 @@ aslQuiz.totalWrong = $(".totalWrong");
 aslQuiz.totalAnsweredHtml = $(".totalAnswered");
 aslQuiz.finalResults = $(".finalResults");
 aslQuiz.beforeTimerFinished = $(".beforeTimerFinished");
+aslQuiz.arrayCounter = true;
 
 //focus input for ux, instead of mouse click
 aslQuiz.setFocusToInput = () => {
@@ -56,7 +57,8 @@ aslQuiz.startQuiz = () => {
   aslQuiz.wrongPoints = 0;
   aslQuiz.totalAnswered = 0;
   //set inital seconds here
-  aslQuiz.seconds = 30;
+  // aslQuiz.seconds = 30;
+  aslQuiz.seconds = 10;
 
   // clear all text fields from last entry
   aslQuiz.totalAnsweredHtml.text(``);
@@ -218,8 +220,13 @@ aslQuiz.formSubmit.on("submit", function (e) {
     }
   } else {
     // finished before timer
-    aslQuiz.stepThree.prepend(
-      `<h3 class="beforeTimerFinished">Wow, You finished in ${aslQuiz.seconds} secs! </h3>`
+    // aslQuiz.stepThree.prepend(
+    //   `<h3 class="beforeTimerFinished">Wow, You finished in ${aslQuiz.seconds} secs! </h3>`
+    // );
+    // update check last submitted question
+    aslQuiz.checkIfCorrect(
+      userAnswerValue,
+      aslQuiz.selectedQuestion.chosenAlphabet
     );
     aslQuiz.quizEnded();
   }
