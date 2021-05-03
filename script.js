@@ -41,7 +41,6 @@ aslQuiz.totalWrong = $(".totalWrong");
 aslQuiz.totalAnsweredHtml = $(".totalAnswered");
 aslQuiz.finalResults = $(".finalResults");
 aslQuiz.beforeTimerFinished = $(".beforeTimerFinished");
-aslQuiz.arrayCounter = true;
 
 //focus input for ux, instead of mouse click
 aslQuiz.setFocusToInput = () => {
@@ -50,15 +49,18 @@ aslQuiz.setFocusToInput = () => {
 
 //start timer
 aslQuiz.startQuiz = () => {
-  //reset values
-  // aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
-  aslQuiz.listOfQuestions = ["a", "b", "c"];
+  /*--------- Game Inital Settings -------------*/
+  //set inital seconds here
+  aslQuiz.seconds = 30;
+
+  //reset array - orignal array
+  aslQuiz.listOfQuestions = "abcdefghijklmnopqrstuvwxyz".split("");
+  /*------------- End Game Inital Settings----------*/
+
+  // reset points
   aslQuiz.correctPoints = 0;
   aslQuiz.wrongPoints = 0;
   aslQuiz.totalAnswered = 0;
-  //set inital seconds here
-  // aslQuiz.seconds = 30;
-  aslQuiz.seconds = 10;
 
   // clear all text fields from last entry
   aslQuiz.totalAnsweredHtml.text(``);
@@ -71,6 +73,10 @@ aslQuiz.startQuiz = () => {
   //hide step one - instructions and step three - final results
   aslQuiz.stepOne.hide();
   aslQuiz.stepThree.hide();
+
+  //if user finished before the timer last time and uses the restart key
+  // before timer finished sections need to be cleared
+  aslQuiz.beforeTimerFinished.hide();
 
   //show actual game page and focus input
   aslQuiz.stepTwo.show();
@@ -219,11 +225,12 @@ aslQuiz.formSubmit.on("submit", function (e) {
       aslQuiz.setFocusToInput();
     }
   } else {
-    // finished before timer
-    // aslQuiz.stepThree.prepend(
-    //   `<h3 class="beforeTimerFinished">Wow, You finished in ${aslQuiz.seconds} secs! </h3>`
-    // );
-    // update check last submitted question
+    // if user finished before timer finished;
+    aslQuiz.beforeTimerFinished.show();
+    aslQuiz.beforeTimerFinished.html(
+      `Wow, You had ${aslQuiz.seconds} secs left!`
+    );
+    // update check last submitted question and update final questions answered
     aslQuiz.checkIfCorrect(
       userAnswerValue,
       aslQuiz.selectedQuestion.chosenAlphabet
